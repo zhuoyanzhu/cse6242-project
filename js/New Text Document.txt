@@ -1,0 +1,8 @@
+	if(name == undefined || color == undefined || duration == undefined || budget == undefined || number == undefined
+	|| director == undefined || actor == undefined || generes == undefined || number == NaN || budget == NaN || duration == NaN)
+	{
+		BootstrapDialog.show({
+			message: 'Either your input information is not enough or in wrong format!'
+		});
+		return;
+	}

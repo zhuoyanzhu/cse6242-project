@@ -1,0 +1,118 @@
+*:focus {
+  outline: none;
+}
+
+html, body {
+    height: 100%;
+    margin: 0 auto;
+}
+body {
+    background-image:url(../images/4.png);
+    background-size: cover;
+    height: 100%;
+}
+.header {
+	text-align: center;
+    font-size: 26px;
+    font-weight: 700;
+	color: azure;
+    font-family: 'Josefin Slab', sans-serif;
+}
+.introduction {
+	padding: 10px;
+}
+.info, .label {
+	text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+	color: azure;
+    font-family: 'Josefin Slab', sans-serif;
+}
+.label {
+	display: block;
+	padding-top: 20px;
+	text-align:left;
+}
+
+.radio-inline, .list-group, .smallLabel{
+	text-align: left;
+    font-size: 14px;
+    font-weight: 700;
+	color: azure;
+    font-family: 'Josefin Slab', sans-serif;
+}
+.panel {
+	background-image:url(../images/4.png);
+}
+.visualize {
+	width: 1000px;
+	height: 1000px;
+}
+.normal {
+	font-size: 16px;
+    font-weight: 700;
+	color: black;
+	font-family: 'Josefin Slab', sans-serif;
+}
+.normal1 {
+	font-size: 14px;
+    font-weight: 700;
+	color: black;
+	text-align: left;
+}
+.normal12 {
+	font-size: 20px;
+    font-weight: 700;
+	color: azure;
+}
+.bootstrapdialog {
+	text-align: left;
+    font-size: 12px;
+    font-weight: 700;
+	color: black;
+	font-family: 'Josefin Slab', sans-serif;
+}
+
+.modal-backdrop {
+	font-size: 18px;
+    font-weight: 700;
+	color: black;
+    font-family: 'Quicksand', sans-serif;
+}
+.vi-body, .get_direction_modal_bg {
+	background-color:black;
+}
+
+.window {
+	height:800px;
+}
+.movie-tile {
+	float:left;
+	overflow:hidden;
+	position:relative;
+	text-align:center;
+	cursor:default;
+}
+.form-control {
+	width:200px;
+}
+
+.movie-tile img {
+	display:block;
+	position:relative;
+	-webkit-transition:all .4s linear;
+	transition:all .4s linear;
+}
+
+.movie-tile:hover img {
+	-ms-transform:scale(1.2);
+	-webkit-transform:scale(1.2);
+	transform:scale(1.2);
+}
+.btn {
+	margin: 2;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+}
+

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Movie predicting</title>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../lib/bootstrap/js/bootstrap-dialog.js"></script>
+	<script type="text/javascript" src="../lib/d3.v3.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link href="../lib/bootstrap/css/bootstrap-dialog.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+</head>
+<body>
+<div class="svg"></div>
+<h1 class="header">
+	Movie income predicting system
+</h1>
+<div class="container">
+  <div class="row">
+  	<div class="col-sm-3"></div>
+    <div class="col-sm-3">
+		<button type="button" class="btn btn-primary btn-lg center-block" id="big_button">Predict movie income</button>
+	</div>
+    <div class="col-sm-3">
+		<button type="button" class="btn btn-primary btn-lg center-block" id="another_button">Movie genere rank</button>
+	</div>
+	<div class="col-sm-3"></div>
+  </div>
+</div>
+<div class="introdution">
+	<p class="info">
+		Please input the basic information of this movie
+	</p>
+</div>
+<div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion"  href="#collapseOne">
+					Movie basic information
+                </a>
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse">
+            <div class="panel-body">
+				<div class="form-group">
+					<label for="name"  class="label">movie name</label>
+						<input type="text" class="form-control" id="name"  placeholder="e.g Alien">
+					<label for="name"  class="label">movie color</label>
+					<form>
+						<label class="radio-inline">
+							<input type="radio" value="0" name="optradio">Color
+						</label>
+						<label class="radio-inline">
+							<input type="radio" value="1" name="optradio">Black And White
+						</label>
+					 </form>
+					 <label for="name"  class="label">movie duration</label>
+						<input type="text" class="form-control" id="duration"  placeholder="e.g 90">
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+					Movie budget and evalution
+                </a>
+            </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse">
+            <div class="panel-body">
+				<label for="name"  class="label">budget</label>
+					<input type="text" class="form-control" id="budget"  placeholder="e.g 40000000">
+				<label for="name"  class="label">number of voted users</label>
+					<input type="text" class="form-control" id="numberOfUsers"  placeholder="e.g 1000">
+				<label for="name"  class="label">number of critic reviewers</label>
+					<input type="text" class="form-control" id="numberOfCritic"  placeholder="e.g 1000">
+				<label for="name"  class="label">number of users for reviews</label>
+					<input type="text" class="form-control" id="numberReview"  placeholder="e.g 1000">	
+				<label for="name"  class="label">IMDB score</label>
+					<input type="text" class="form-control" id="IMDBscore"  placeholder="e.g 6.0">
+				<label for="name"  class="label">num of facebooklike</label>
+					<input type="text" class="form-control" id="facebooklike"  placeholder="e.g 200">
+			</div>
+		</div>
+	</div>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+					Movie detailed Information
+                </a>
+            </h4>
+        </div>
+        <div id="collapseThree" class="panel-collapse collapse">
+            <div class="panel-body">
+				<div class="form-group">
+				<label for="name"  class="label">director</label>
+					<label id="label1" class="smallLabel">Selected director(only 1):</label>
+					<fieldset>
+						<input type="text" class="form-control  col-lg-3" id="director"  placeholder="e.g zzy">
+						<span class="input-group-btn">
+						<button class="btn btn-primary" type="button" id="button1">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</fieldset>
+				<br>
+				<label for="name"  class="label">actor or actress</label>
+					<label id="label2" class="smallLabel">Selected actors(max 3):</label>
+					<fieldset>
+						<input type="text" class="form-control col-lg-3" id="actor"  placeholder="e.g zzy">
+						<span class="input-group-btn">
+						<button class="btn btn-primary" type="button" id="button2">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</fieldset>
+				<br>
+				<label for="name"  class="label">topics</label>
+					<label id="label3" class="smallLabel">Selected topics:</label>
+					<fieldset>
+						<input type="text" class="form-control col-lg-3" id="topic"  placeholder="e.g cult">
+						<span class="input-group-btn">
+						<button class="btn btn-primary" type="button" id="button3">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</fieldset>
+				<br>
+				<label for="name"  class="label">genere</label>
+						<select class="form-control selectpicker" id = "genere" multiple>
+							<option>Action</option>
+							<option>Adventure</option>
+							<option>Fantasy</option>
+							<option>Sci-Fi</option>
+							<option>Thriller</option>
+							<option>Romance</option>
+							<option>Animation</option>
+							<option>Comedy</option>
+							<option>Family</option>
+							<option>Musical</option>
+							<option>Mystery</option>
+							<option>Western</option>
+							<option>Drama</option>
+							<option>History</option>
+							<option>Sport</option>
+							<option>Crime</option>
+							<option>Horror</option>
+							<option>War</option>
+							<option>Biography</option>
+							<option>Music</option>
+							<option>Documentary</option>
+					</select>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="shareWin1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog visualize">
+    <div class="modal-content get_direction_modal_bg">
+      <div class="text-right background"><a class="fa fa-times white normal12" data-dismiss="modal">close</a></div>
+      <div class="modal-body vi-body">
+        <p class="header text-center">The analysis result of movie predicting system</p>
+		<div id="donut-charts"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="shareWin2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog visualize">
+    <div class="modal-content get_direction_modal_bg">
+      <div class="text-right background"><a class="fa fa-times white normal12" data-dismiss="modal">close</a></div>
+      <div class="modal-body vi-body window">
+        <p class="header text-center">Result of clustering and rank of different generes</p>
+		<div id="images">
+			<div class="col-md-4 col-lg-3 movie-tile text-center"  id="m1">
+				<div class="thumbnail">
+					<img src="../themes/1.png" class="img-thumbnail" alt="Alien" width="200" height="200">
+				</div>
+			</div>
+			<div class="col-md-4 col-lg-3 movie-tile text-center"  id="m2">
+				<div class="thumbnail">
+					<img src="../themes/2.png" class="img-thumbnail" alt="Alien" width="200" height="200">
+				</div>
+			</div>
+			<div class="col-md-4 col-lg-3 movie-tile text-center" id="m3">
+				<div class="thumbnail">
+					<img src="../themes/3.jpg" class="img-thumbnail" alt="Alien" width="200" height="200">
+				</div>
+			</div>
+			<div class="col-md-4 col-lg-3 movie-tile text-center" id="m4">
+				<div class="thumbnail">
+					<img src="../themes/4.jpg" class="img-thumbnail" alt="Alien" width="200" height="200">
+				</div>
+			</div>
+			<div class="col-md-4 col-lg-3 movie-tile text-center" id="m5">
+				<div class="thumbnail">
+					<img src="../themes/5.jpg" class="img-thumbnail" alt="Alien" width="200" height="200">
+				</div>
+			</div>
+			<div class="col-md-4 col-lg-3 movie-tile text-center" id="m6">
+				<div class="thumbnail">
+					<img src="../themes/6.jpg" class="img-thumbnail" alt="Alien" width="200" height="200">
+				</div>
+			</div>
+			<div class="col-md-4 col-lg-3 movie-tile text-center" id="m7">
+				<div class="thumbnail">
+					<img src="../themes/7.png" class="img-thumbnail" alt="Alien" width="200" height="200">
+				</div>
+			</div>
+			<div class="col-md-4 col-lg-3 movie-tile text-center" id="m8">
+				<div class="thumbnail">
+					<img src="../themes/8.jpg" class="img-thumbnail" alt="Alien" width="200" height="200">
+				</div>
+			</div>
+			<div class="col-md-4 col-lg-3 movie-tile text-center" id="m9">
+				<div class="thumbnail">
+					<img src="../themes/9.jpg" class="img-thumbnail" alt="Alien" width="200" height="200">
+				</div>
+			</div>
+			<div class="col-md-4 col-lg-3 movie-tile text-center" id="m10">
+				<div class="thumbnail">
+					<img src="../themes/10.jpg" class="img-thumbnail" alt="Alien" width="200" height="200">
+				</div>
+			</div>
+			<div class="col-md-4 col-lg-3 movie-tile text-center" id="m11">
+				<div class="thumbnail">
+					<img src="../themes/11.jpg" class="img-thumbnail" alt="Alien" width="200" height="200">
+				</div>
+			</div>
+			<div class="col-md-4 col-lg-3 movie-tile text-center" id="m12">
+				<div class="thumbnail">
+					<img src="../themes/12.jpg" class="img-thumbnail" alt="Alien" width="200" height="200">
+				</div>
+			</div>
+		</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="shareWin3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog visualize">
+    <div class="modal-content get_direction_modal_bg">
+      <div class="text-right background"><a class="fa fa-times white normal12" data-dismiss="modal">close</a></div>
+      <div class="modal-body vi-body">
+	  	<ul class="list-group" id="group1">
+		</ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="shareWin4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog visualize">
+    <div class="modal-content get_direction_modal_bg">
+      <div class="text-right background"><a class="fa fa-times white normal12" data-dismiss="modal">close</a></div>
+      <div class="modal-body vi-body">
+	  	<ul class="list-group" id="group2">
+		</ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="shareWin5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog visualize">
+    <div class="modal-content get_direction_modal_bg">
+      <div class="text-right background"><a class="fa fa-times white normal12" data-dismiss="modal">close</a></div>
+      <div class="modal-body vi-body">
+	  	<ul class="list-group" id="group3">
+		</ul>
+      </div>
+    </div>
+  </div>
+</div>
+	<script type="text/javascript" src="../js/main.js">
+	</script>
+  </body>
+</html>
